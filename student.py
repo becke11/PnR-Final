@@ -57,7 +57,7 @@ class GoPiggy(pigo.Pigo):
                 self.encR(10)
                 self.encL(12)
                 servo(120)
-                self.encF(8)
+                self.encF(20)
         if False:
             self.encB(10)
             self.encR(18)
