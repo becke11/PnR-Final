@@ -33,7 +33,8 @@ class GoPiggy(pigo.Pigo):
                 "2": ("Rotate", self.rotate),
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
-                "q": ("Quit", quit)
+                "q": ("Quit", quit),
+                "s": ('status', self.status)
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
@@ -55,6 +56,9 @@ class GoPiggy(pigo.Pigo):
             self.encL(12)
             servo(120)
             self.encF(8)
+
+    def status(self):
+        print('my power is at' + str(volt()) + "volts")
 
 
 
