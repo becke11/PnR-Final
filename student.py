@@ -47,21 +47,17 @@ class GoPiggy(pigo.Pigo):
     def dance(self):
         print("Is it safe to dance?")
         ##### WRITE YOUR FIRST PROJECT HERE
-        print(self.isClear())
-            if True:
-                for x in range (100, 200, 25):
-                    print ('Speed is set to ' + str(x))
-                    set_speed(x)
-                    servo(20)
-                    self.encB(6)
-                    self.encR(10)
-                    self.encL(12)
-                    servo(120)
-                    self.encF(20)
-            if False:
-                self.encB(10)
-                self.encR(18)
-                print(self.isClear())
+        x=100
+        while self.isClear() and x <= 200:
+            print ('Speed is set to ' + str(x))
+            set_speed(x)
+            servo(20)
+            self.encB(6)
+            self.encR(10)
+            self.encL(12)
+            servo(120)
+            self.encF(20)
+            x +=25
 
 
     def status(self):
