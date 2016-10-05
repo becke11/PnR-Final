@@ -33,8 +33,8 @@ class GoPiggy(pigo.Pigo):
                 "2": ("Rotate", self.rotate),
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
-                "q": ("Quit", quit),
-                "s": ('status', self.status)
+                "s": ('status', self.status),
+                "q": ("Quit", quit)
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
@@ -45,20 +45,27 @@ class GoPiggy(pigo.Pigo):
 
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
-        print("Piggy dance")
+        print("Is it safe to dance?")
         ##### WRITE YOUR FIRST PROJECT HERE
-        for x in range (100, 200, 25):
-            print ('Speed is set to' + str(x))
-            set_speed(x)
-            servo(20)
-            self.encB(6)
-            self.encR(10)
-            self.encL(12)
-            servo(120)
-            self.encF(8)
+        print(self.isClear())
+        if True:
+            for x in range (100, 200, 25):
+                print ('Speed is set to ' + str(x))
+                set_speed(x)
+                servo(20)
+                self.encB(6)
+                self.encR(10)
+                self.encL(12)
+                servo(120)
+                self.encF(8)
+        if False:
+            self.encB(10)
+            self.encR(18)
+            print(self.isClear())
+
 
     def status(self):
-        print('my power is at' + str(volt()) + "volts")
+        print('my power is at ' + str(volt()) + " volts")
 
 
 
