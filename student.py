@@ -55,6 +55,7 @@ class GoPiggy(pigo.Pigo):
             servo(20)
             self.encR(6)
             servo(40)
+            choosePath(self)
             self.encL(5)
             servo(60)
             self.encB(6)
