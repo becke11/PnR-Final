@@ -48,7 +48,7 @@ class GoPiggy(pigo.Pigo):
         print("Is it safe to dance?")
         ##### WRITE YOUR FIRST PROJECT HERE
         x=100
-        while self.isClear() and x <= 200:
+        while x <= 200:
             print ('Speed is set to ' + str(x))
             self.choosePath()
             set_speed(x)
