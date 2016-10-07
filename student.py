@@ -50,6 +50,7 @@ class GoPiggy(pigo.Pigo):
         x=100
         while self.isClear() and x <= 200:
             print ('Speed is set to ' + str(x))
+            choosePath(self)
             set_speed(x)
             servo(20)
             self.encR(6)
@@ -57,14 +58,16 @@ class GoPiggy(pigo.Pigo):
             self.encL(5)
             servo(60)
             self.encB(6)
+            choosePath(self)
             servo(80)
             self.encR(10)
             servo(100)
+            choosePath(self)
             self.encL(12)
             servo(120)
             self.encF(6)
             time.sleep(.3)
-            x += 25
+            x += 50
 
     def status(self):
         print('my power is at ' + str(volt()) + " volts")
