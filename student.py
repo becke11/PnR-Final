@@ -51,7 +51,6 @@ class GoPiggy(pigo.Pigo):
             if not self.isClear():
                 print("NOT SAFE. TURN BACK NOW")
                 break
-            x = 100
             print ('Speed is set to ' + str(x))
             self.choosePath()
             set_speed(x)
