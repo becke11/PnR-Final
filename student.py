@@ -47,7 +47,7 @@ class GoPiggy(pigo.Pigo):
     def dance(self):
         print("Is it safe to dance?")
         ##### WRITE YOUR FIRST PROJECT HERE
-        for x in range(3):
+        for x in range(100, 200, 50):
             if not self.isClear():
                 print("NOT SAFE. TURN BACK NOW")
                 break
