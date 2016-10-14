@@ -47,8 +47,11 @@ class GoPiggy(pigo.Pigo):
     def dance(self):
         print("Is it safe to dance?")
         ##### WRITE YOUR FIRST PROJECT HERE
-        x=100
+            x=100
         while x <= 200:
+            if not self.isClear():
+                print("NOT SAFE. TURN BACK NOW")
+                break
             print ('Speed is set to ' + str(x))
             self.choosePath()
             set_speed(x)
@@ -60,17 +63,19 @@ class GoPiggy(pigo.Pigo):
             servo(50)
             servo(40)
             self.choosePath()
+            self.encB(5)
             self.encL(40)
             servo(60)
             self.encB(9)
             self.encR(3)
             self.encL(3)
             self.encR(3)
-            self.encL(3)
+            self.encB(3)
             servo(80)
             self.encR(18)
             servo(100)
             self.choosePath()
+            self.encB(5)
             self.encL(6)
             servo(120)
             self.encF(2)
