@@ -62,11 +62,7 @@ class GoPiggy(pigo.Pigo):
                 servo(50)
                 servo(40)
                 self.choosePath()
-                    if return "right":
-                        encR(10)
-                    else:
-                        encL(18)
-                self.encB(5)
+                self.encB(6)
                 self.encL(40)
                 servo(60)
                 self.encB(9)
