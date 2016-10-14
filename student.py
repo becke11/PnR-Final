@@ -78,7 +78,7 @@ class GoPiggy(pigo.Pigo):
                 self.encL(6)
                 servo(120)
                 self.encF(2)
-                time.sleep(.3)
+                time.sleep(.1)
                 x += 50
 
     def status(self):
