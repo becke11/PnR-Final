@@ -98,11 +98,12 @@ class GoPiggy(pigo.Pigo):
             #go forward a bit
             encF(15)
             #trying to complete the TODO
-            if not self.isClear():
-                self.encB(5)
-                self.encR(9)
-                self.encF(10)
-                self.encL(9)
+
+        if not self.isClear():
+            self.encB(5)
+            self.encR(9)
+            self.encF(10)
+            self.encL(9)
 
 
 ####################################################
