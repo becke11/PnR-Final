@@ -96,7 +96,7 @@ class GoPiggy(pigo.Pigo):
         #loop: check that it's clear
         while self.isClear():
             #go forward a bit
-            self.encF(10)
+            self.encF(30)
 
 
 ####################################################
