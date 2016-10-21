@@ -94,7 +94,7 @@ class GoPiggy(pigo.Pigo):
         ##### WRITE YOUR FINAL PROJECT HERE
         #TODO : IF while loop fails, check for other paths
         #loop: check that it's clear
-        while self.isClear():
+        '''while self.isClear():
             #go forward a bit
             encF(15)
             #trying to complete the TODO
@@ -103,7 +103,15 @@ class GoPiggy(pigo.Pigo):
             self.encB(5)
             self.encR(9)
             self.encF(10)
-            self.encL(9)
+            self.encL(9)'''
+        while True:
+            while self.isClear():
+                encF(10):
+                answer= self.choosePath()
+                if answer == "left":
+                    self.encL(5)
+                elif answer == "right":
+                    self.encR(5)
 
 
 ####################################################
