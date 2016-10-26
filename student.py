@@ -106,7 +106,7 @@ class GoPiggy(pigo.Pigo):
             self.encL(9)'''
         #TODO: create a larger area for a quick scan
     def isClear(self) -> bool:
-        for x in range((self.MIDPOINT - 30), (self.MIDPOINT + 33), +7):
+        for x in range((self.MIDPOINT - 23), (self.MIDPOINT + 33), +7):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
