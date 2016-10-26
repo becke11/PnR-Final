@@ -104,10 +104,11 @@ class GoPiggy(pigo.Pigo):
             self.encR(9)
             self.encF(10)
             self.encL(9)'''
+        #TODO: find encR and encL values of a 90 turn
         while True:
             while self.isClear():
-                self.encF(15)
-                answer= self.choosePath()
+                self.encF(10)
+                answer = self.choosePath()
                 if answer == "left":
                     self.encL(8)
                     self.flushScan()
