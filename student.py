@@ -110,8 +110,10 @@ class GoPiggy(pigo.Pigo):
                 answer= self.choosePath()
                 if answer == "left":
                     self.encL(5)
+                    self.flushScan()
                 elif answer == "right":
                     self.encR(5)
+                    self.flushScan()
 
 
 ####################################################
