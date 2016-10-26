@@ -104,28 +104,6 @@ class GoPiggy(pigo.Pigo):
             self.encR(9)
             self.encF(10)
             self.encL(9)'''
-        #TODO: create a larger area for a quick scan
-    def isClear(self) -> bool:
-        for x in range((self.MIDPOINT - 23), (self.MIDPOINT + 33), +7):
-            servo(x)
-            time.sleep(.1)
-            scan1 = us_dist(15)
-            time.sleep(.1)
-            # double check the distance
-            scan2 = us_dist(15)
-            time.sleep(.1)
-            # if I found a different distance the second time....
-            if abs(scan1 - scan2) > 2:
-                scan3 = us_dist(15)
-                time.sleep(.1)
-                # take another scan and average the three together
-                scan1 = (scan1 + scan2 + scan3) / 3
-            self.scan[x] = scan1
-            print("Degree: " + str(x) + ", distance: " + str(scan1))
-            if scan1 < self.STOP_DIST:
-                print("Doesn't look clear to me")
-                return False
-        return True
         #TODO: find encR and encL values of a 90 turn
         while True:
             while self.isClear():
