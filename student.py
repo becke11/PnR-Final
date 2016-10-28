@@ -108,19 +108,7 @@ class GoPiggy(pigo.Pigo):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
         #TODO : IF while loop fails, check for other paths
-        #loop: check that it's clear
-        '''while self.isClear():
-            #go forward a bit
-            encF(15)
-            #trying to complete the TODO
-
-        if not self.isClear():
-            self.encB(5)
-            self.encR(9)
-            self.encF(10)
-            self.encL(9)'''
-        #TODO: find encR and encL values of a 90 turn
-        while True:
+        """while True:
             while self.isClear():
                 self.encF(10)
                 answer = self.choosePath()
@@ -129,7 +117,18 @@ class GoPiggy(pigo.Pigo):
                     self.flushScan()
                 elif answer == "right":
                     self.encR(8)
-                    self.flushScan()
+                    self.flushScan()"""
+
+        while True:
+            # loop: check that its clear
+            while self.isClear():
+                # lets go forward a little
+                self.testDrive()
+            answer = self.choosePath()
+            if answer == "left":
+                self.encL(5)
+            elif answer == "right":
+                self.encR(5)
 
     ##Test Drive Method
     def testDrive(self):
