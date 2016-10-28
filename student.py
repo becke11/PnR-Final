@@ -13,7 +13,18 @@ class GoPiggy(pigo.Pigo):
     # CUSTOM INSTANCE VARIABLES GO HERE. You get the empty self.scan array from Pigo
     # You may want to add a variable to store your default speed
     MIDPOINT = 81
-    STOP_DIST = 20
+    STOP_DIST = 30
+    speed = 100
+    TURNSPEED = 195
+
+    def setSpeed(self, x):
+        self.speed = x
+        set_left_speed(self.speed-10)
+        set_right_speed(self.speed)
+
+    def getSpeed(self):
+        return self.speed
+
 
     # CONSTRUCTOR
     def __init__(self):
@@ -34,7 +45,6 @@ class GoPiggy(pigo.Pigo):
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
                 "s": ('status', self.status),
-                "t": ("Test", self.testDrive),
                 "q": ("Quit", quit)
                 }
         # loop and print the menu...
@@ -43,6 +53,12 @@ class GoPiggy(pigo.Pigo):
         #
         ans = input("Your selection: ")
         menu.get(ans, [None, error])[1]()
+
+    def turnL(self, x):
+        previous = self.getSpeed()
+        self.setSpeed(self.TURNSPEED)
+        self.encL(x)
+        self.setSpeed(previous)
 
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
@@ -117,16 +133,17 @@ class GoPiggy(pigo.Pigo):
                     self.encR(8)
                     self.flushScan()
 
-
+    ##Test Drive Method
     def testDrive(self):
-        print("Here I go.")
+        print("here we go!!")
         fwd()
         while True:
-            if us_dist(15)<self.STOP_DIST:
+            if us_dist(15) < self.STOP_DIST:
+                print("PTI")
                 break
             time.sleep(.05)
+            print("let's go")
         self.stop()
-
 
 ####################################################
 ############### STATIC FUNCTIONS
