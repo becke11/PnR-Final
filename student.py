@@ -17,9 +17,10 @@ class GoPiggy(pigo.Pigo):
     speed = 100
     TURNSPEED = 195
 
+    # Used to make the engines equal
     def setSpeed(self, x):
         self.speed = x
-        set_left_speed(self.speed-10)
+        set_left_speed(self.speed-12)
         set_right_speed(self.speed)
 
     def getSpeed(self):
@@ -100,9 +101,6 @@ class GoPiggy(pigo.Pigo):
 
     def status(self):
         print('my power is at ' + str(volt()) + " volts")
-
-
-
 
 
     # AUTONOMOUS DRIVING
