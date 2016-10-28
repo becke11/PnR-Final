@@ -34,6 +34,7 @@ class GoPiggy(pigo.Pigo):
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
                 "s": ('status', self.status),
+                "t": ("Testing", self.testDrive),
                 "q": ("Quit", quit)
                 }
         # loop and print the menu...
@@ -115,6 +116,16 @@ class GoPiggy(pigo.Pigo):
                 elif answer == "right":
                     self.encR(8)
                     self.flushScan()
+
+
+    def testDrive(self):
+        print("Here I go.")
+        fwd()
+        while True:
+            if us_dist(15)<self.STOP_DIST:
+                break
+            time.sleep(.05)
+        self.stop()
 
 
 ####################################################
