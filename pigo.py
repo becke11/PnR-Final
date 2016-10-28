@@ -11,6 +11,8 @@ import time
 class Pigo(object):
     MIDPOINT = 77
     STOP_DIST = 20
+    RIGHT_SPEED: 185
+    LEFT_SPEED: 165
     scan = [None] * 180
 
     def __init__(self):
