@@ -20,7 +20,7 @@ class GoPiggy(pigo.Pigo):
     # Used to make the engines equal
     def setSpeed(self, x):
         self.speed = x
-        set_left_speed(self.speed-12)
+        set_left_speed(self.speed-20)
         set_right_speed(self.speed)
 
     def getSpeed(self):
