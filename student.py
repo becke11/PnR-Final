@@ -36,6 +36,7 @@ class GoPiggy(pigo.Pigo):
         while True:
             self.stop()
             self.handler()
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
 
     ##### HANDLE IT
     def handler(self):
@@ -132,6 +133,8 @@ class GoPiggy(pigo.Pigo):
 
     ##Test Drive Method
     def testDrive(self):
+        servo(self.midpoint)
+        time.sleep(.1)
         print("here we go!!")
         fwd()
         while True:
