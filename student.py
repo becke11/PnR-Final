@@ -133,7 +133,7 @@ class GoPiggy(pigo.Pigo):
 
     ##Test Drive Method
     def testDrive(self):
-        servo(self.midpoint)
+        servo(81)
         time.sleep(.1)
         print("here we go!!")
         fwd()
