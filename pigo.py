@@ -8,7 +8,7 @@ import time
 
 class Pigo(object):
     MIDPOINT = 77
-    STOP_DIST = 20
+    STOP_DIST = 30
     RIGHT_SPEED = 200
     LEFT_SPEED = 250
     scan = [None] * 180
