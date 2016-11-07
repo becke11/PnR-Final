@@ -145,6 +145,22 @@ class GoPiggy(pigo.Pigo):
             print("let's go")
         self.stop()
 
+    def encR(self, enc):
+        self.TURN_TRACK -= enc
+        if(self.TURN_TRACK > 0):
+            print("exit to the right by " + str(self.turn_track) + " units")
+        else:
+            print("exit to the left by " + str(abs(self.turn_track)) + " units")
+        super(Pigo.pigo, self).encR(enc)
+
+    def encL(self, enc):
+        self.TURN_TRACK += enc
+        if(self.TURN_TRACK > 0):
+            print("exit to the right by " + str(self.turn_track) + " units")
+        else:
+            print("exit to the left by " + str(abs(self.turn_track)) + " units")
+        super(Pigo.pigo, self).encL(enc)
+
 ####################################################
 ############### STATIC FUNCTIONS
 
