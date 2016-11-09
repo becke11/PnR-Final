@@ -108,18 +108,8 @@ class GoPiggy(pigo.Pigo):
     def nav(self):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
-        #TODO : IF while loop fails, check for other paths
-        """while True:
-            while self.isClear():
-                self.encF(10)
-                answer = self.choosePath()
-                if answer == "left":
-                    self.encL(8)
-                    self.flushScan()
-                elif answer == "right":
-                    self.encR(8)
-                    self.flushScan()"""
 
+        ### Using given/created methods
         while True:
             # loop: check that its clear
             while self.isClear():
@@ -145,6 +135,7 @@ class GoPiggy(pigo.Pigo):
             print("let's go")
         self.stop()
 
+    ###TURN TRACKING WITH encR PARENT METHOD
     def encR(self, enc):
         self.TURN_TRACK -= enc
         if(self.TURN_TRACK > 0):
@@ -160,6 +151,7 @@ class GoPiggy(pigo.Pigo):
         else:
             print("exit to the left by " + str(abs(self.turn_track)) + " units")
         super(Pigo.pigo, self).encL(enc)
+        # TODO: figure out how to use this information to ensure that the robot does not go backwards
 
 ####################################################
 ############### STATIC FUNCTIONS
