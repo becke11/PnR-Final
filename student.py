@@ -12,10 +12,12 @@ improve the parent class and it won't overwrite your work.
 class GoPiggy(pigo.Pigo):
     # CUSTOM INSTANCE VARIABLES GO HERE. You get the empty self.scan array from Pigo
     # You may want to add a variable to store your default speed
+    #TODO: fix the turn_track method
     MIDPOINT = 81
     STOP_DIST = 30
     speed = 100
     TURNSPEED = 195
+    turn_track = zero
 
     # Used to make the engines equal
     def setSpeed(self, x):
