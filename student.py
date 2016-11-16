@@ -18,7 +18,8 @@ class GoPiggy(pigo.Pigo):
     speed = 100
     LEFT_SPEED = 190
     RIGHT_SPEED = 190
-    DEGREE_TIME = .00922
+    TIME_PER_DEGREE = .00922
+    TURN_MODIFIER = .5
 
     # Used to make the engines equal
     def setSpeed(self, x):
@@ -155,6 +156,27 @@ class GoPiggy(pigo.Pigo):
             print("exit to the left by " + str(abs(self.turn_track)) + " units")
         super(Pigo.pigo, self).encL(enc)
         # TODO: figure out how to use this information to ensure that the robot does not go backwards
+
+    def turnR(self, deg):
+        # Two new instance variables are needed
+        # 1) TIME_PER_DEGREE - .00922
+        # 2) TURN_MODIFIER - .5
+        print ("Let's turn " + str(deg) + " degrees right")
+        print("That means I turn for " + (deg*self.TIME_FOR_DEGREE) + " seconds")
+
+        print("Let's change motor speeds!")
+        set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
+        set_right_speed(self.RIGHT_SPEED * self.TURN_MODIFIER)
+
+        right_rot()
+        time.sleep(deg*self.TIME_PER_DEGREE)
+        self.stop()
+
+        set_left_speed(self.LEFT_SPEED)
+        set_right_speed(self.RIGHT_SPEED)
+
+
+
 
 ####################################################
 ############### STATIC FUNCTIONS
