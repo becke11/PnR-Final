@@ -18,6 +18,7 @@ class GoPiggy(pigo.Pigo):
     speed = 100
     LEFT_SPEED = 190
     RIGHT_SPEED = 190
+    DEGREE_TIME = .00922
 
     # Used to make the engines equal
     def setSpeed(self, x):
