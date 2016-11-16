@@ -16,8 +16,9 @@ class GoPiggy(pigo.Pigo):
     MIDPOINT = 81
     STOP_DIST = 30
     speed = 100
-    TURNSPEED = 195
     turn_track = zero
+    LEFT_SPEED = 190
+    RIGHT_SPEED = 190
 
     # Used to make the engines equal
     def setSpeed(self, x):
