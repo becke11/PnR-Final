@@ -15,9 +15,11 @@ class GoPiggy(pigo.Pigo):
     #TODO: fix the turn_track method
     MIDPOINT = 81
     STOP_DIST = 30
-    speed = 100
     LEFT_SPEED = 190
     RIGHT_SPEED = 190
+
+
+    turn_track = 0.0
     TIME_PER_DEGREE = .00922
     TURN_MODIFIER = .5
 
@@ -107,6 +109,34 @@ class GoPiggy(pigo.Pigo):
     def status(self):
         print('my power is at ' + str(volt()) + " volts")
 
+    ###MY NEW TURN METHODS BECAUSE encR AND encL JUST DON'T CUT
+    #takes number of degrees and turns accordingly
+    def turnR(self, deg):
+        self.turn_track += deg
+        print("the exit is " + str(self.turn_track) + " degrees away")
+        self.setSpeed(self.LEFT_SPEED * self.TURN_MODIFIER,
+                      self.RIGHT_SPEED * self.TURN_MODIFIER)
+        right_rot()
+        time.sleep(deg * self.TIME_PER_DEGREE)
+        self.stop()
+        slef.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
+
+    def turnL(self, deg):
+        #adjust tracker so we know how far away we are from the exit
+        self.turn_track -= deg
+        print("the exit is " + str(self.turn_track) + " degrees away")
+        self.setSpeed(self.LEFT_SPEED * self.TURN_MODIFIER,
+                      self.RIGHT_SPEED * self.TURN_MODIFIER)
+
+    left_rot()
+    time.sleep(deg * self.TIME_PER_DEGREE)
+    slef.stop()
+
+    def setSpeed(self, left, right):
+        set_left_speed(left)
+        set_right_speed(right)
+        time.sleep(.05)
+
 
     # AUTONOMOUS DRIVING
     def nav(self):
@@ -157,7 +187,7 @@ class GoPiggy(pigo.Pigo):
         super(Pigo.pigo, self).encL(enc)
         # TODO: figure out how to use this information to ensure that the robot does not go backwards
 
-    def turnR(self, deg):
+    """"def turnR(self, deg):
         # Two new instance variables are needed
         # 1) TIME_PER_DEGREE - .00922
         # 2) TURN_MODIFIER - .5
@@ -173,7 +203,7 @@ class GoPiggy(pigo.Pigo):
         self.stop()
 
         set_left_speed(self.LEFT_SPEED)
-        set_right_speed(self.RIGHT_SPEED)
+        set_right_speed(self.RIGHT_SPEED)"""
 
 
 
