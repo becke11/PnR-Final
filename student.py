@@ -133,8 +133,8 @@ class GoPiggy(pigo.Pigo):
     slef.stop()
 
     def setSpeed(self, left, right):
-        set_left_speed(left)
-        set_right_speed(right)
+        set_left_speed(int(left))
+        set_right_speed(int(right))
         time.sleep(.05)
 
 
