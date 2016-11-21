@@ -110,7 +110,8 @@ class GoPiggy(pigo.Pigo):
         print('my power is at ' + str(volt()) + " volts")
 
     ###MY NEW TURN METHODS BECAUSE encR AND encL JUST DON'T CUT
-    #takes number of degrees and turns accordingly
+    #takes number of degrees and turns accordingly\
+    # TODO: find out how to use the turn_track method to keep the robot from going backwards
     def turnR(self, deg):
         self.turn_track += deg
         print("the exit is " + str(self.turn_track) + " degrees away")
@@ -190,7 +191,7 @@ class GoPiggy(pigo.Pigo):
         self.TURN_TRACK += enc
         if(self.TURN_TRACK > 0):
             print("exit to the right by " + str(self.turn_track) + " units")
-        else:
+        elif (self.TURN_TRACK >= 90):
             print("exit to the left by " + str(abs(self.turn_track)) + " units")
         super(Pigo.pigo, self).encL(enc)
         # TODO: figure out how to use this information to ensure that the robot does not go backwards
