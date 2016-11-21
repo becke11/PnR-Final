@@ -170,6 +170,7 @@ class GoPiggy(pigo.Pigo):
             if us_dist(15) < self.STOP_DIST:
                 print("PTI")
                 break
+                self.backUp
                 # Todo: insert a method that backs away before turning
             time.sleep(.05)
             print("let's go")
@@ -192,6 +193,9 @@ class GoPiggy(pigo.Pigo):
             print("exit to the left by " + str(abs(self.turn_track)) + " units")
         super(Pigo.pigo, self).encL(enc)
         # TODO: figure out how to use this information to ensure that the robot does not go backwards
+
+    def backUp(self):
+        encB(5)
 
     """"def turnR(self, deg):
         # Two new instance variables are needed
