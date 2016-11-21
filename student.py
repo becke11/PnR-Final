@@ -138,18 +138,24 @@ class GoPiggy(pigo.Pigo):
 
 
     # AUTONOMOUS DRIVING
+
+    ## Explain the prupose of the method
+    #Central logic loop of my navigation
     def nav(self):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
 
         ### Using given/created methods
+        ### main app loop
         while True:
             # loop: check that its clear
             while self.isClear():
                 # lets go forward a little
                 self.testDrive()
+            # TODO: replace choosePath with a method that's smarter
             answer = self.choosePath()
             if answer == "left":
+                # Todo: replace 30 with a variable representing a smarter option
                 self.turnL(30)
             elif answer == "right":
                 self.turnR(30)
@@ -164,6 +170,7 @@ class GoPiggy(pigo.Pigo):
             if us_dist(15) < self.STOP_DIST:
                 print("PTI")
                 break
+                # Todo: insert a method that backs away before turning
             time.sleep(.05)
             print("let's go")
         self.stop()
