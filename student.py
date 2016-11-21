@@ -156,8 +156,10 @@ class GoPiggy(pigo.Pigo):
             answer = self.choosePath()
             if answer == "left":
                 # Todo: replace 30 with a variable representing a smarter option
+                self.backUp
                 self.turnL(30)
             elif answer == "right":
+                self.backUp
                 self.turnR(30)
 
     ##Test Drive Method
@@ -170,7 +172,6 @@ class GoPiggy(pigo.Pigo):
             if us_dist(15) < self.STOP_DIST:
                 print("PTI")
                 break
-                self.backUp
                 # Todo: insert a method that backs away before turning
             time.sleep(.05)
             print("let's go")
