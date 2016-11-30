@@ -145,11 +145,11 @@ class GoPiggy(pigo.Pigo):
             answer = self.choosePath()
             if answer == "left":
                 # back up before the turns to not hit anything
-                self.backUp
+                encB(7)
                 self.turnL(30)
             elif answer == "right":
                 # back up before turn to not hit anything
-                self.backUp
+                encB(7)
                 self.turnR(30)
 
     # Method that continues driving until sensors see something in the robots way
@@ -166,9 +166,8 @@ class GoPiggy(pigo.Pigo):
             print("let's go")
         self.stop()
 
-    def backUp(self):
-        encB(5)
 
+    # method to test turning
     def testTurn(self):
         print("let's see if our tracking is accurate")
         self.turnR(50)
