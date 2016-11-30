@@ -12,7 +12,6 @@ improve the parent class and it won't overwrite your work.
 class GoPiggy(pigo.Pigo):
     # CUSTOM INSTANCE VARIABLES GO HERE. You get the empty self.scan array from Pigo
     # You may want to add a variable to store your default speed
-    #TODO: fix the turn_track method
     MIDPOINT = 81
     STOP_DIST = 30
     LEFT_SPEED = 190
@@ -23,14 +22,6 @@ class GoPiggy(pigo.Pigo):
     TIME_PER_DEGREE = .00922
     TURN_MODIFIER = .5
 
-    # Used to make the engines equal
-    def setSpeed(self, x):
-        self.speed = x
-        set_left_speed(self.speed)
-        set_right_speed(self.speed * .5)
-
-    def getSpeed(self):
-        return self.speed
 
 
     # CONSTRUCTOR
@@ -61,12 +52,6 @@ class GoPiggy(pigo.Pigo):
         #
         ans = input("Your selection: ")
         menu.get(ans, [None, error])[1]()
-
-    def turnL(self, x):
-        previous = self.getSpeed()
-        self.setSpeed(self.TURNSPEED)
-        self.encL(x)
-        self.setSpeed(previous)
 
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
@@ -106,12 +91,11 @@ class GoPiggy(pigo.Pigo):
                 time.sleep(.1)
                 x += 50
 
-    def status(self):
-        print('my power is at ' + str(volt()) + " volts")
 
     ###MY NEW TURN METHODS BECAUSE encR AND encL JUST DON'T CUT
     #takes number of degrees and turns accordingly\
     # TODO: find out how to use the turn_track method to keep the robot from going backwards
+    # better alternative to encR
     def turnR(self, deg):
         self.turn_track += deg
         print("the exit is " + str(self.turn_track) + " degrees away")
@@ -120,8 +104,9 @@ class GoPiggy(pigo.Pigo):
         right_rot()
         time.sleep(deg * self.TIME_PER_DEGREE)
         self.stop()
-        slef.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
 
+    # better alternative to encL
     def turnL(self, deg):
         #adjust tracker so we know how far away we are from the exit
         self.turn_track -= deg
@@ -132,6 +117,7 @@ class GoPiggy(pigo.Pigo):
         time.sleep(deg * self.TIME_PER_DEGREE)
         self.stop()
 
+    # determines speed for turns
     def setSpeed(self, left, right):
         set_left_speed(int(left))
         set_right_speed(int(right))
@@ -163,7 +149,7 @@ class GoPiggy(pigo.Pigo):
                 self.backUp
                 self.turnR(30)
 
-    ##Test Drive Method
+    # major navigation code
     def testDrive(self):
         servo(81)
         time.sleep(.1)
@@ -178,26 +164,6 @@ class GoPiggy(pigo.Pigo):
             print("let's go")
         self.stop()
 
-    ###TURN TRACKING WITH encR PARENT METHOD
-    def encR(self, enc):
-        self.TURN_TRACK -= enc
-        if(self.TURN_TRACK > 0):
-            print("exit to the right by " + str(self.turn_track) + " units")
-        else:
-            print("exit to the left by " + str(abs(self.turn_track)) + " units")
-        super(Pigo.pigo, self).encR(enc)
-
-    def encL(self, enc):
-        self.TURN_TRACK += enc
-        if(self.TURN_TRACK > 0):
-            print("exit to the right by " + str(self.turn_track) + " units")
-        elif (self.TURN_TRACK >= 90):
-            print("exit to the left by " + str(abs(self.turn_track)) + " units")
-        super(Pigo.pigo, self).encL(enc)
-        # TODO: figure out how to use this information to ensure that the robot does not go backwards
-
-    def backUp(self):
-        encB(5)
 
     """"def turnR(self, deg):
         # Two new instance variables are needed
