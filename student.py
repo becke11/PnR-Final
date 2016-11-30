@@ -12,6 +12,7 @@ improve the parent class and it won't overwrite your work.
 class GoPiggy(pigo.Pigo):
     # CUSTOM INSTANCE VARIABLES GO HERE. You get the empty self.scan array from Pigo
     # You may want to add a variable to store your default speed
+    # TODO: find out how to use the turn_track method to keep the robot from going backwards
     MIDPOINT = 81
     STOP_DIST = 30
     LEFT_SPEED = 190
@@ -44,6 +45,7 @@ class GoPiggy(pigo.Pigo):
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
                 "s": ('status', self.status),
+                "TT": ('test turn', self.testTurn),
                 "q": ("Quit", quit)
                 }
         # loop and print the menu...
@@ -94,7 +96,6 @@ class GoPiggy(pigo.Pigo):
 
     ###MY NEW TURN METHODS BECAUSE encR AND encL JUST DON'T CUT
     #takes number of degrees and turns accordingly\
-    # TODO: find out how to use the turn_track method to keep the robot from going backwards
     # better alternative to encR
     def turnR(self, deg):
         self.turn_track += deg
@@ -128,6 +129,8 @@ class GoPiggy(pigo.Pigo):
 
     ## Explain the prupose of the method
     #Central logic loop of my navigation
+    #TODO: replace choosePath with smarter option
+    #TODO: replace 30 with a variable representing a smarter option
     def nav(self):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
@@ -139,17 +142,17 @@ class GoPiggy(pigo.Pigo):
             while self.isClear():
                 # lets go forward a little
                 self.testDrive()
-            # TODO: replace choosePath with a method that's smarter
             answer = self.choosePath()
             if answer == "left":
-                # Todo: replace 30 with a variable representing a smarter option
+                # back up before the turns to not hit anything
                 self.backUp
                 self.turnL(30)
             elif answer == "right":
+                # back up before turn to not hit anything
                 self.backUp
                 self.turnR(30)
 
-    # major navigation code
+    # Method that continues driving until sensors see something in the robots way
     def testDrive(self):
         servo(81)
         time.sleep(.1)
@@ -159,10 +162,32 @@ class GoPiggy(pigo.Pigo):
             if us_dist(15) < self.STOP_DIST:
                 print("PTI")
                 break
-                # Todo: insert a method that backs away before turning
             time.sleep(.05)
             print("let's go")
         self.stop()
+
+    def backUp(self):
+        encB(5)
+
+    def testTurn(self):
+        print("let's see if our tracking is accurate")
+        self.turnR(50)
+        self.turnL(60)
+        input("Am I about 10 degrees from the exit?")
+        self.turnL(80)
+        input(" Am I about 90 degrees from the start?")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     """"def turnR(self, deg):
