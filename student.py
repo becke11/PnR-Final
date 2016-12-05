@@ -12,7 +12,6 @@ improve the parent class and it won't overwrite your work.
 class GoPiggy(pigo.Pigo):
     # CUSTOM INSTANCE VARIABLES GO HERE. You get the empty self.scan array from Pigo
     # You may want to add a variable to store your default speed
-    # TODO: find out how to use the turn_track method to keep the robot from going backwards
     MIDPOINT = 81
     STOP_DIST = 30
     LEFT_SPEED = 190
@@ -129,8 +128,6 @@ class GoPiggy(pigo.Pigo):
 
     ## Explain the prupose of the method
     #Central logic loop of my navigation
-    #TODO: replace choosePath with smarter option
-    #TODO: replace 30 with a variable representing a smarter option
     def nav(self):
         print("Piggy nav")
         ### Using given/created methods
@@ -140,8 +137,10 @@ class GoPiggy(pigo.Pigo):
             if self.isClear():
                 # lets go forward a little
                 self.testDrive()
-
+            # back ups before turn
+            self.backUp()
             turn_target = self.kenny()
+            # which way to turn
             if turn_target < 0:
                 self.turnR(abs(turn_target))
             else:
@@ -165,7 +164,7 @@ class GoPiggy(pigo.Pigo):
     def kenny(self):
         #Activate our scanner!
         self.wideScan()
-        # count will keep track of contigeous positive readings
+        # count will keep track of contiguous positive readings
         count = 0
         # list of all the open paths we detect
         option = [0]
@@ -222,6 +221,13 @@ class GoPiggy(pigo.Pigo):
             input("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
         return bestoption
 
+    def backUp(self):
+        if us_dist(15) < 10:
+            print("Too close. Backing up for half a second")
+            bwd()
+            time.sleep(.5)
+            self.stop()
+
     #########################################
     ### SCANNER - move head to take sensor readings
 
@@ -261,7 +267,7 @@ class GoPiggy(pigo.Pigo):
     # Method that continues driving until sensors see something in the robots way
     def testDrive(self):
         servo(81)
-        time.sleep(.1)
+        time.sleep(.05)
         print("here we go!!")
         fwd()
         while True:
