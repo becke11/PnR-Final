@@ -133,24 +133,130 @@ class GoPiggy(pigo.Pigo):
     #TODO: replace 30 with a variable representing a smarter option
     def nav(self):
         print("Piggy nav")
-        ##### WRITE YOUR FINAL PROJECT HERE
-
         ### Using given/created methods
         ### main app loop
         while True:
             # loop: check that its clear
-            while self.isClear():
+            if self.isClear():
                 # lets go forward a little
                 self.testDrive()
-            answer = self.choosePath()
-            if answer == "left":
-                # back up before the turns to not hit anything
-                encB(7)
+
+            turn_target = self.kenny()
+            if turn_target < 0:
+                self.turnR(abs(turn_target))
+            else:
+                self.turnL(turn_target)
+
+
+            """if answer == "left":
                 self.turnL(30)
+                # self.turnL(turn_target)
             elif answer == "right":
                 # back up before turn to not hit anything
                 encB(7)
                 self.turnR(30)
+                # self.turnR(turn_target)
+            else:
+                print("I can't find a path")"""
+
+    #################################
+    ### THE KENNY METHOD OF SCANNING - experimental
+
+    def kenny(self):
+        #Activate our scanner!
+        self.wideScan()
+        # count will keep track of contigeous positive readings
+        count = 0
+        # list of all the open paths we detect
+        option = [0]
+        #YOU DECIDE: What do we add to STOP_DIST when looking for a path fwd?
+        SAFETY_BUFFER = 30
+        #YOU DECIDE: what increment do you have your wideScan set to?
+        INC = 2
+
+        ###########################
+        ######### BUILD THE OPTIONS
+        #loop from the 60 deg right of our middle to 60 deg left of our middle
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60):
+            # ignore all blank spots in the list
+            if self.scan[x]:
+                # add 30 if you want, this is an extra safety buffer
+                if self.scan[x] > (self.STOP_DIST + SAFETY_BUFFER):
+                    count += 1
+                # if this reading isn't safe...
+                else:
+                    # aww nuts, I have to reset the count, this path won't work
+                    count = 0
+                #YOU DECIDE: Is 16 degrees the right size to consider as a safe window?
+                if count > (16 / INC) - 1:
+                    # SUCCESS! I've found enough positive readings in a row
+                    print("---FOUND OPTION: from " + str(x - 16) + " to " + str(x))
+                    #set the counter up again for next time
+                    count = 0
+                    #add this option to the list
+                    option.append(x - 8)
+
+        ####################################
+        ############## PICK FROM THE OPTIONS - experimental
+
+        #The biggest angle away from our midpoint we could possibly see is 90
+        bestoption = 90
+        #the turn it would take to get us aimed back toward the exit - experimental
+        ideal = -self.turn_track
+        print("\nTHINKING. Ideal turn: " + str(ideal) + " degrees\n")
+        # x will iterate through all the angles of our path options
+        for x in option:
+            # skip our filler option
+            if x != 0:
+                # the change to the midpoint needed to aim at this path
+                turn = self.MIDPOINT - x
+                # state our logic so debugging is easier
+                print("\nPATH @  " + str(x) + " degrees means a turn of " + str(turn))
+                # if this option is closer to our ideal than our current best option...
+                if abs(ideal - bestoption) > abs(ideal - turn):
+                    # store this turn as the best option
+                    bestoption = turn
+        if bestoption > 0:
+            input("\nABOUT TO TURN RIGHT BY: " + str(bestoption) + " degrees")
+        else:
+            input("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
+        return bestoption
+
+    #########################################
+    ### SCANNER - move head to take sensor readings
+
+    def wideScan(self):
+        #dump all values that might be in our list
+        self.flushScan()
+        #YOU DECIDE: What increment should we use when scanning?
+        for x in range(self.MIDPOINT-60, self.MIDPOINT+60, +2):
+            # move the sensor that's mounted to our servo
+            servo(x)
+            #give some time for the servo to move
+            time.sleep(.1)
+            #take our first measurement
+            scan1 = us_dist(15)
+            time.sleep(.1)
+            #double check the distance
+            scan2 = us_dist(15)
+            #if I found a different distance the second time....
+            if abs(scan1 - scan2) > 2:
+                scan3 = us_dist(15)
+                time.sleep(.1)
+                #take another scan and average? the three together - you decide
+                scan1 = (scan1+scan2+scan3)/3
+            self.scan[x] = scan1
+            print("Degree: "+str(x)+", distance: "+str(scan1))
+            time.sleep(.01)
+
+
+
+
+
+
+
+
+
 
     # Method that continues driving until sensors see something in the robots way
     def testDrive(self):
@@ -159,7 +265,7 @@ class GoPiggy(pigo.Pigo):
         print("here we go!!")
         fwd()
         while True:
-            if us_dist(15) < self.STOP_DIST:
+            if us_dist(25) < self.STOP_DIST:
                 print("PTI")
                 break
             time.sleep(.05)
@@ -175,17 +281,6 @@ class GoPiggy(pigo.Pigo):
         input("Am I about 10 degrees from the exit?")
         self.turnL(80)
         input(" Am I about 90 degrees from the start?")
-
-
-
-
-
-
-
-
-
-
-
 
 
 
