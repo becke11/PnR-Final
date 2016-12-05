@@ -257,27 +257,24 @@ class GoPiggy(pigo.Pigo):
 
 
 
-
-
-
-
-
-
-
-    # Method that continues driving until sensors see something in the robots way
-    def testDrive(self):
-        servo(81)
+    # This method drives forward as long as nothing's in the way
+    def cruise(self):
+        # Extra credit: Upgrade this so it looks around while driving
+        # Use the GoPiGo API's method to aim the sensor forward
+        servo(self.MIDPOINT)
+        #give the robot time to move
         time.sleep(.05)
-        print("here we go!!")
+        # start driving forward
         fwd()
+        # start an infinite loop
         while True:
-            if us_dist(25) < self.STOP_DIST:
-                print("PTI")
+            # break the loop if the sensor reading is closer than our stop dist
+            if us_dist(15) < self.STOP_DIST:
                 break
+            #YOU DECIDE: How many seconds do you wait in between a check?
             time.sleep(.05)
-            print("let's go")
+        # stop if the sensor loop broke
         self.stop()
-
 
     # method to test turning
     def testTurn(self):
