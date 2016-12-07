@@ -14,10 +14,10 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 81
     STOP_DIST = 30
-    LEFT_SPEED = 190
-    RIGHT_SPEED = 190
+    LEFT_SPEED = 200
+    RIGHT_SPEED = 200
 
-
+    # variable to use with kenny method to face
     turn_track = 0.0
     TIME_PER_DEGREE = .00922
     TURN_MODIFIER = .5
@@ -30,10 +30,11 @@ class GoPiggy(pigo.Pigo):
         # this method makes sure Piggy is looking forward
         #self.calibrate()
         # let's use an event-driven model, make a handler of sorts to listen for "events"
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
         while True:
             self.stop()
             self.handler()
-        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
+
 
     ##### HANDLE IT
     def handler(self):
