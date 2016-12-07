@@ -142,9 +142,9 @@ class GoPiggy(pigo.Pigo):
             turn_target = self.kenny()
             # which way to turn
             if turn_target > 0:
-                self.turnR(abs(turn_target))
+                self.turnR(turn_target)
             else:
-                self.turnL(turn_target)
+                self.turnL(abs(turn_target))
 
 
             """if answer == "left":
