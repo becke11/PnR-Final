@@ -141,7 +141,7 @@ class GoPiggy(pigo.Pigo):
             self.backUp()
             turn_target = self.kenny()
             # which way to turn
-            if turn_target < 0:
+            if turn_target > 0:
                 self.turnR(abs(turn_target))
             else:
                 self.turnL(turn_target)
