@@ -19,7 +19,7 @@ class GoPiggy(pigo.Pigo):
 
     # variable to use with kenny method to face
     turn_track = 0.0
-    TIME_PER_DEGREE = .0108
+    TIME_PER_DEGREE = .0141
     TURN_MODIFIER = .5
 
 
@@ -137,19 +137,19 @@ class GoPiggy(pigo.Pigo):
             # loop: check that its clear
             if self.isClear():
                 # lets go forward a little
-                self.cruise()
+                self.testDrive()
             # back ups before turn
             self.backUp()
-            """turn_target = self.kenny()
+            turn_target = self.kenny()
             # which way to turn
             if turn_target > 0:
                 # turn right and track turn
                 self.turnR(turn_target)
             else:
                 # turn left and track turn
-                self.turnL(abs(turn_target))"""
+                self.turnL(abs(turn_target))
 
-            answer = self.choosePath()
+            """answer = self.choosePath()
             if answer == "left":
                 self.backUp()
                 self.turnL(30)
@@ -160,7 +160,7 @@ class GoPiggy(pigo.Pigo):
                 self.turnR(30)
                 # self.turnR(turn_target)
             else:
-                print("I can't find a path")
+                print("I can't find a path")"""
 
     #################################
     ### THE KENNY METHOD OF SCANNING - experimental
@@ -259,25 +259,30 @@ class GoPiggy(pigo.Pigo):
             print("Degree: "+str(x)+", distance: "+str(scan1))
             time.sleep(.01)
 
-
-
-    # This method drives forward as long as nothing's in the way
-    def cruise(self):
-        # Extra credit: Upgrade this so it looks around while driving
-        # Use the GoPiGo API's method to aim the sensor forward
+    # Test Drive Method
+    def testDrive(self):
+        # add code so servo faces forward
         servo(self.MIDPOINT)
-        #give the robot time to move
+        # give the robot time to move
         time.sleep(.05)
-        # start driving forward
+        print("Here we go!")
         fwd()
-        # start an infinite loop
+        # start in an infinite loop
+        # loop-- will continue until something gets in the way
         while True:
-            # break the loop if the sensor reading is closer than our stop dist
+            # break the loop if the sensor reading is closer than our stop distance
             if us_dist(15) < self.STOP_DIST:
-                break
-            #YOU DECIDE: How many seconds do you wait in between a check?
+                self.stop()
+                print("Ahhhhhh! All stop")
+                if us_dist(15) < self.STOP_DIST:
+                    break
+            else:
+                fwd()
+                continue
+                # you decide... how many seconds do you wait in between a check?
             time.sleep(.05)
-        # stop if the sensor loop broke
+            print("Seems clear, keep rolling")
+            # stop if the sensor loop broke
         self.stop()
 
     # method to test turning
