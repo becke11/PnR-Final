@@ -151,12 +151,12 @@ class GoPiggy(pigo.Pigo):
 
             answer = self.choosePath()
             if answer == "left":
-                encB(7)
+                self.backUp()
                 self.turnL(30)
                 # self.turnL(turn_target)
             elif answer == "right":
                 # back up before turn to not hit anything
-                encB(7)
+                self.backUp()
                 self.turnR(30)
                 # self.turnR(turn_target)
             else:
