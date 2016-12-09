@@ -140,17 +140,18 @@ class GoPiggy(pigo.Pigo):
                 self.cruise()
             # back ups before turn
             self.backUp()
-            turn_target = self.kenny()
+            """turn_target = self.kenny()
             # which way to turn
             if turn_target > 0:
                 # turn right and track turn
                 self.turnR(turn_target)
             else:
                 # turn left and track turn
-                self.turnL(abs(turn_target))
+                self.turnL(abs(turn_target))"""
 
-
-            """if answer == "left":
+            answer = self.choosePath()
+            if answer == "left":
+                encB(7)
                 self.turnL(30)
                 # self.turnL(turn_target)
             elif answer == "right":
@@ -159,7 +160,7 @@ class GoPiggy(pigo.Pigo):
                 self.turnR(30)
                 # self.turnR(turn_target)
             else:
-                print("I can't find a path")"""
+                print("I can't find a path")
 
     #################################
     ### THE KENNY METHOD OF SCANNING - experimental
