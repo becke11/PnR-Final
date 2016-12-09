@@ -19,7 +19,7 @@ class GoPiggy(pigo.Pigo):
 
     # variable to use with kenny method to face
     turn_track = 0.0
-    TIME_PER_DEGREE = .00922
+    TIME_PER_DEGREE = .0108
     TURN_MODIFIER = .5
 
 
@@ -143,8 +143,10 @@ class GoPiggy(pigo.Pigo):
             turn_target = self.kenny()
             # which way to turn
             if turn_target > 0:
+                # turn right and track turn
                 self.turnR(turn_target)
             else:
+                # turn left and track turn
                 self.turnL(abs(turn_target))
 
 
