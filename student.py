@@ -13,7 +13,7 @@ class GoPiggy(pigo.Pigo):
     # CUSTOM INSTANCE VARIABLES GO HERE. You get the empty self.scan array from Pigo
     # You may want to add a variable to store your default speed
     MIDPOINT = 81
-    STOP_DIST = 30
+    STOP_DIST = 35
     LEFT_SPEED = 130
     RIGHT_SPEED = 130
 
@@ -160,7 +160,7 @@ class GoPiggy(pigo.Pigo):
             # loop: check that its clear
             while self.isClear():
                 # lets go forward a little
-                self.encF(10)
+                self.encF(9)
             # back ups before turn
             self.backUp()
             turn_target = self.kenny()
