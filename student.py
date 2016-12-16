@@ -14,13 +14,13 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 81
     STOP_DIST = 30
-    LEFT_SPEED = 150
-    RIGHT_SPEED = 150
+    LEFT_SPEED = 130
+    RIGHT_SPEED = 130
 
     # variable to use with kenny method to face
     turn_track = 0.0
     TIME_PER_DEGREE = .0141
-    TURN_MODIFIER = .5
+    TURN_MODIFIER = .8
 
 
 
@@ -265,7 +265,7 @@ class GoPiggy(pigo.Pigo):
         # add code so servo faces forward
         servo(self.MIDPOINT)
         # give the robot time to move
-        time.sleep(.05)
+        time.sleep(.04)
         print("Here we go!")
         fwd()
         # start in an infinite loop
