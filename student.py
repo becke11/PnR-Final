@@ -14,8 +14,8 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 81
     STOP_DIST = 30
-    LEFT_SPEED = 200
-    RIGHT_SPEED = 200
+    LEFT_SPEED = 150
+    RIGHT_SPEED = 150
 
     # variable to use with kenny method to face
     turn_track = 0.0
