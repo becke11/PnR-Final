@@ -160,7 +160,7 @@ class GoPiggy(pigo.Pigo):
             # loop: check that its clear
             while self.isClear():
                 # lets go forward a little
-                self.encF()
+                self.encF(10)
             # back ups before turn
             self.backUp()
             turn_target = self.kenny()
