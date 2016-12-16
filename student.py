@@ -243,13 +243,13 @@ class GoPiggy(pigo.Pigo):
                     # store this turn as the best option
                     bestoption = turn
         if bestoption > 0:
-            input("\nABOUT TO TURN RIGHT BY: " + str(bestoption) + " degrees")
+            print("\nABOUT TO TURN RIGHT BY: " + str(bestoption) + " degrees")
         else:
-            input("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
+            print("\nABOUT TO TURN LEFT BY: " + str(abs(bestoption)) + " degrees")
         return bestoption
 
     def backUp(self):
-        if us_dist(15) < 10:
+        if us_dist(15) < 15:
             print("Too close. Backing up for half a second")
             bwd()
             time.sleep(.5)
@@ -262,7 +262,7 @@ class GoPiggy(pigo.Pigo):
         #dump all values that might be in our list
         self.flushScan()
         #YOU DECIDE: What increment should we use when scanning?
-        for x in range(self.MIDPOINT-60, self.MIDPOINT+60, +2):
+        for x in range(self.MIDPOINT-60, self.MIDPOINT+60, +4):
             # move the sensor that's mounted to our servo
             servo(x)
             #give some time for the servo to move
