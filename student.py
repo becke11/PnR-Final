@@ -158,9 +158,9 @@ class GoPiggy(pigo.Pigo):
         ### main app loop
         while True:
             # loop: check that its clear
-            if self.isClear():
+            while self.isClear():
                 # lets go forward a little
-                self.testDrive()
+                self.encF()
             # back ups before turn
             self.backUp()
             turn_target = self.kenny()
