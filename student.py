@@ -117,6 +117,7 @@ class GoPiggy(pigo.Pigo):
         left_rot()
         time.sleep(deg * self.TIME_PER_DEGREE)
         self.stop()
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
 
     # determines speed for turns
     def setSpeed(self, left, right):
